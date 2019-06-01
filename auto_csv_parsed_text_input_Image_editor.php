@@ -25,24 +25,30 @@ while (($line = fgetcsv($file,'0',';')) !== FALSE) {
 	   if($line[51]==1)
 	   {$circle='-fill "rgba("'.$line[52].'","'.$line[53].'")" -draw "circle 400,600 0,600"';}
 	   else{$circle="";}
-	   
+       
+	   #draw straight line horizontal 
+       if($line[54]!==""){$hline='-stroke black -draw "line'.$line[55].' '.$line[56].'"'}
+       
+       
+       //Drawing the images with text and other modifications
+       
 	   if($line[1]==1){
-		$command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].' '.$circle.' '.$t1.' '.$t2.' '.$t3.' -resize 800x1200! down\\'.$i.'.jpg';
+		$command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].' '.$circle.' '.$t1.' '.$t2.' '.$t3.' '.$hline.' -resize 800x1200! down\\'.$i.'.jpg';
 	   }
 	   if($line[1]==2){
-		$command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].' -gravity center -crop 400x1200+0+0 +repage input\\\"'.$line[3].'"  '.$line[24].' '.$line[46].'   -gravity center -crop 400x1200+0+0 +repage -border 2  +append '.$circle.' '.$t1.' '.$t2.' '.$t3.' -resize 800x1200! down\\'.$i.'.jpg';
+		$command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].' -gravity center -crop 400x1200+0+0 +repage input\\\"'.$line[3].'"  '.$line[24].' '.$line[46].'   -gravity center -crop 400x1200+0+0 +repage -border 2  +append '.$circle.' '.$t1.' '.$t2.' '.$t3.' '.$hline.' -resize 800x1200! down\\'.$i.'.jpg';
 	   }
 	   if($line[1]==3){
-		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  -resize 400x600! ( input\\\"'.$line[3].'" -resize 400x600! '.$line[24].'  '.$line[46].'  -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].'  '.$line[47].'  -resize 800x600! -border 2x0 ) -border 0x2 -append '.$circle.' '.$t1.' '.$t2.' '.$t3.' -resize 800x1200! down\\'.$i.'.jpg';  
+		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  -resize 400x600! ( input\\\"'.$line[3].'" -resize 400x600! '.$line[24].'  '.$line[46].'  -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].'  '.$line[47].'  -resize 800x600! -border 2x0 ) -border 0x2 -append '.$circle.' '.$t1.' '.$t2.' '.$t3.' '.$hline.' -resize 800x1200! down\\'.$i.'.jpg';  
 	   }
 	   if($line[1]==4){
-		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  ( input\\\"'.$line[3].'" '.$line[24].' '.$line[46].'  -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].' '.$line[47].'  input\\\"'.$line[5].'" '.$line[33].'  '.$line[48].'  -border 2x0 +append ) -border 0x2 -append -resize 800x1200! '.$circle.' '.$t1.' '.$t2.' '.$t3.' down\\'.$i.'.jpg';
+		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  ( input\\\"'.$line[3].'" '.$line[24].' '.$line[46].'  -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].' '.$line[47].'  input\\\"'.$line[5].'" '.$line[33].'  '.$line[48].'  -border 2x0 +append ) -border 0x2 -append -resize 800x1200! '.$circle.' '.$t1.' '.$t2.' '.$t3.' '.$hline.' down\\'.$i.'.jpg';
 	   }
 	   if($line[1]==5){
-		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  -resize 400x600! ( input\\\"'.$line[3].'" '.$line[24].' '.$line[46].'  -resize 400x600! -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].' '.$line[47].'  -resize 800x400! ) -border 0x2 -append ( input\\\"'.$line[5].'" '.$line[33].' '.$line[48].'  -resize 400x600! input\\\"'.$line[35].'" '.$line[37].' '.$line[49].'  -resize 400x600! -border 2x0 +append ) -border 0x2 -append -resize 800x1200! '.$circle.' '.$t1.' '.$t2.' '.$t3.'  down\\'.$i.'.jpg'; 
+		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  -resize 400x600! ( input\\\"'.$line[3].'" '.$line[24].' '.$line[46].'  -resize 400x600! -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].' '.$line[47].'  -resize 800x400! ) -border 0x2 -append ( input\\\"'.$line[5].'" '.$line[33].' '.$line[48].'  -resize 400x600! input\\\"'.$line[35].'" '.$line[37].' '.$line[49].'  -resize 400x600! -border 2x0 +append ) -border 0x2 -append -resize 800x1200! '.$circle.' '.$t1.' '.$t2.' '.$t3.' '.$hline.' down\\'.$i.'.jpg'; 
 	   }
 	   if($line[1]==6){
-		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  ( input\\\"'.$line[3].'" '.$line[24].' '.$line[46].'  -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].' '.$line[47].'  input\\\"'.$line[5].'" '.$line[33].' '.$line[48].'  -border 2x0 +append ) -border 0x2 -append ( input\\\"'.$line[35].'" '.$line[37].' '.$line[49].'  input\\\"'.$line[36].'" '.$line[38].' '.$line[50].'  -border 2x0 +append ) -border 0x2 -append  -resize 800x1200! '.$circle.' '.$t1.' '.$t2.' '.$t3.' down\\'.$i.'.jpg'; 
+		 $command='convert input\\\"'.$line[2].'" '.$line[16].' '.$line[45].'  ( input\\\"'.$line[3].'" '.$line[24].' '.$line[46].'  -border 2x0 ) +append ( input\\\"'.$line[4].'" '.$line[32].' '.$line[47].'  input\\\"'.$line[5].'" '.$line[33].' '.$line[48].'  -border 2x0 +append ) -border 0x2 -append ( input\\\"'.$line[35].'" '.$line[37].' '.$line[49].'  input\\\"'.$line[36].'" '.$line[38].' '.$line[50].'  -border 2x0 +append ) -border 0x2 -append  -resize 800x1200! '.$circle.' '.$t1.' '.$t2.' '.$t3.' '.$hline.' down\\'.$i.'.jpg'; 
 	   }
 	   
 	   echo $command;
